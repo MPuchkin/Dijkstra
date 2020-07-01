@@ -9,19 +9,22 @@
 
 using namespace std;
 
-int main()
+int main(int argc, char* argv[])
 {
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
     system("chcp 65001");
 #endif
 
-    Graph G;
-    //G.generateGraph(100);
-    //G.saveToFile("graphNext.txt");
+    const Graph G = [argc, argv]{
+        Graph G;
+        if (argc == 1) {
+            G.generateGraph(100);
+        } else {
+            G.loadFromFile(argv[1]);
+        }
+        return G;
+    }();
 
-    G.loadFromFile("Dijkstra.txt");
-    //cout << G << endl;
-    
     const vertex::size_type startNode = 1;
     const vertex::size_type finishNode = 9563;
     
