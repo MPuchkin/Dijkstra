@@ -115,6 +115,7 @@ public:
 		cont[0] = std::move(cont[cont.size() - 1]);
 		//  Последний тихо-мирно оставляем за бортом (его уже в начало перенесли)
 		cont.pop_back();
+		if (cont.size() == 0) return;
 		//  Внутри обязателен вызов update_index
 		heapify(0);
 	}
