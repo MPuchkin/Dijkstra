@@ -25,13 +25,13 @@ int main()
     auto v = dk.calcPath(startNode, finishNode);
     time_t finish = clock();
     
-    cout << "Êðàò÷àéøèé ïóòü: ";
+    cout << "ÐšÑ€Ð°Ñ‚Ñ‡Ð°Ð¹ÑˆÐ¸Ð¹ Ð¿ÑƒÑ‚ÑŒ: ";
     for (auto x : v.first)
     {
         cout << x << " ";
     }
 
-    cout << "\nÄëèíà ïóòè èç " << startNode << " â " << finishNode << " ðàâíà " << v.second << "\n";
+    cout << "\nÐ”Ð»Ð¸Ð½Ð° Ð¿ÑƒÑ‚Ð¸ Ð¸Ð· " << startNode << " Ð² " << finishNode << " Ñ€Ð°Ð²Ð½Ð° " << v.second << "\n";
     cout << "Time: " << double(finish - start) / CLOCKS_PER_SEC << " seconds\n";
 
     /*G.saveToFile("graph.txt");
@@ -41,4 +41,3 @@ int main()
     system("graph.txt");*/
     return 0;
 }
-
