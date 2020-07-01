@@ -10,48 +10,48 @@
 #include <deque>
 #include <exception>
 
-//  Ребро
+//  Р РµР±СЂРѕ
 struct edge {
 	using size_type = size_t;
 	using weight_type = size_t;
-	//  Куда ведёт ребро
+	//  РљСѓРґР° РІРµРґС‘С‚ СЂРµР±СЂРѕ
 	size_type dest;
-	//  Вес ребра
+	//  Р’РµСЃ СЂРµР±СЂР°
 	weight_type weight;
 	edge(size_type Dest, weight_type W) : dest(Dest), weight(W) {}
 };
 
-//  Вершина графа
+//  Р’РµСЂС€РёРЅР° РіСЂР°С„Р°
 class vertex {
 public:
 	using size_type = edge::size_type;
 	using weight_type = edge::weight_type;
-	//  Имя - это просто номер/индекс
+	//  РРјСЏ - СЌС‚Рѕ РїСЂРѕСЃС‚Рѕ РЅРѕРјРµСЂ/РёРЅРґРµРєСЃ
 	size_type name;
-	//  Список смежных вершин
+	//  РЎРїРёСЃРѕРє СЃРјРµР¶РЅС‹С… РІРµСЂС€РёРЅ
 	std::list<edge> adj;
 
 	vertex(size_type Name) : name(Name) {}
 	
-	//  Добавление ребра
+	//  Р”РѕР±Р°РІР»РµРЅРёРµ СЂРµР±СЂР°
 	void addEdge(size_type dest, weight_type w) {
 		adj.push_back(edge(dest, w));
 	}
 	
-	//  Константные итераторы на списки смежных рёбер
+	//  РљРѕРЅСЃС‚Р°РЅС‚РЅС‹Рµ РёС‚РµСЂР°С‚РѕСЂС‹ РЅР° СЃРїРёСЃРєРё СЃРјРµР¶РЅС‹С… СЂС‘Р±РµСЂ
 	std::list<edge>::const_iterator cbegin() const { return adj.cbegin(); }
 	std::list<edge>::const_iterator cend() const { return adj.cend(); }
 };
 
-//  Представление графа
+//  РџСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ РіСЂР°С„Р°
 class Graph {
 public:
 	using sizetype = vertex::size_type;
 	using weighttype = vertex::weight_type;
-	//  Количество вершин
+	//  РљРѕР»РёС‡РµСЃС‚РІРѕ РІРµСЂС€РёРЅ
 	sizetype grSize;
 
-	// Список вершин (со списками смежности)
+	// РЎРїРёСЃРѕРє РІРµСЂС€РёРЅ (СЃРѕ СЃРїРёСЃРєР°РјРё СЃРјРµР¶РЅРѕСЃС‚Рё)
 	std::vector<vertex> vertices;
 
 
@@ -64,12 +64,12 @@ public:
 	std::vector<vertex>::const_iterator cend() const { return vertices.cend(); }
 
 
-	//  Генерация случайного графа
+	//  Р“РµРЅРµСЂР°С†РёСЏ СЃР»СѓС‡Р°Р№РЅРѕРіРѕ РіСЂР°С„Р°
 	void generateGraph(sizetype Size) {
 		grSize = Size;
 		vertices.clear();
 		vertices.reserve(grSize);
-		//  Сразу заполняем вектор вершин
+		//  РЎСЂР°Р·Сѓ Р·Р°РїРѕР»РЅСЏРµРј РІРµРєС‚РѕСЂ РІРµСЂС€РёРЅ
 		for (sizetype i = 0; i < grSize; ++i)
 			vertices.push_back(vertex(i));
 
@@ -77,22 +77,22 @@ public:
 		std::uniform_int_distribution<sizetype> distribution(1, grSize - 1);
 		std::uniform_int_distribution<sizetype> distribution2(1, 100000);
 
-		//  Отметки рёбер, которые уже добавлены
+		//  РћС‚РјРµС‚РєРё СЂС‘Р±РµСЂ, РєРѕС‚РѕСЂС‹Рµ СѓР¶Рµ РґРѕР±Р°РІР»РµРЅС‹
 		std::vector<sizetype> marks(grSize, std::numeric_limits<sizetype>::max());
 
 		for (sizetype vert = 0; vert < grSize; ++vert) {
 			
-			//  Случайно добавляем рёбра
+			//  РЎР»СѓС‡Р°Р№РЅРѕ РґРѕР±Р°РІР»СЏРµРј СЂС‘Р±СЂР°
 			for (size_t i = 0; i < 100; ++i) {
 				sizetype dest = distribution(generator);
 				weighttype w = distribution2(generator);
 				
-				//  Если это петля или такое ребро уже добавляли, то пропуск
+				//  Р•СЃР»Рё СЌС‚Рѕ РїРµС‚Р»СЏ РёР»Рё С‚Р°РєРѕРµ СЂРµР±СЂРѕ СѓР¶Рµ РґРѕР±Р°РІР»СЏР»Рё, С‚Рѕ РїСЂРѕРїСѓСЃРє
 				if (dest == vert || marks[dest] == vert) continue;
 
 				vertices[vert].addEdge(dest, w);
 				//vertices[dest].addEdge(vert, w);
-				//  Значит, ребро из vert в dest уже было
+				//  Р—РЅР°С‡РёС‚, СЂРµР±СЂРѕ РёР· vert РІ dest СѓР¶Рµ Р±С‹Р»Рѕ
 				marks[dest] = vert;
 			}
 		}
@@ -147,7 +147,7 @@ public:
 	}
 };
 
-//  Этот метод необходим для тестирования графа - проверяем доступ извне по константным итераторам
+//  Р­С‚РѕС‚ РјРµС‚РѕРґ РЅРµРѕР±С…РѕРґРёРј РґР»СЏ С‚РµСЃС‚РёСЂРѕРІР°РЅРёСЏ РіСЂР°С„Р° - РїСЂРѕРІРµСЂСЏРµРј РґРѕСЃС‚СѓРї РёР·РІРЅРµ РїРѕ РєРѕРЅСЃС‚Р°РЅС‚РЅС‹Рј РёС‚РµСЂР°С‚РѕСЂР°Рј
 inline std::ostream & operator<<(std::ostream & out, const Graph & gr) {
 	out << "Graph  (" << gr.size() << ") nodes \n";
 	for (auto nodeIt = gr.cbegin(); nodeIt != gr.cend(); ++nodeIt) {
