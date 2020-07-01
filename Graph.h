@@ -26,10 +26,13 @@ class vertex {
 public:
 	using size_type = edge::size_type;
 	using weight_type = edge::weight_type;
+
+	using container_type = std::vector<edge>;
+
 	//  Имя - это просто номер/индекс
 	size_type name;
 	//  Список смежных вершин
-	std::list<edge> adj;
+	container_type adj;
 
 	vertex(size_type Name) : name(Name) {}
 
@@ -39,8 +42,8 @@ public:
 	}
 
 	//  Константные итераторы на списки смежных рёбер
-	std::list<edge>::const_iterator cbegin() const { return adj.cbegin(); }
-	std::list<edge>::const_iterator cend() const { return adj.cend(); }
+	container_type::const_iterator cbegin() const { return adj.cbegin(); }
+	container_type::const_iterator cend() const { return adj.cend(); }
 };
 
 //  Представление графа
