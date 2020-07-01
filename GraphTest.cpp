@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
     }();
 
     const vertex::size_type startNode = 1;
-    const vertex::size_type finishNode = 9563;
+    const vertex::size_type finishNode = min(G.size()-1, vertex::size_type(9563));
     
     time_t start = clock();
     Dijkstra<vertex> dk(G);
