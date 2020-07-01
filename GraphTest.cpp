@@ -16,14 +16,14 @@ int main()
 #endif
 
     Graph G;
-    G.generateGraph(100);
-    G.saveToFile("graphNext.txt");
+    //G.generateGraph(100);
+    //G.saveToFile("graphNext.txt");
 
-    //G.loadFromFile("Dijkstra.txt");
+    G.loadFromFile("Dijkstra.txt");
     //cout << G << endl;
     
     const vertex::size_type startNode = 1;
-    const vertex::size_type finishNode = 95;
+    const vertex::size_type finishNode = 9563;
     
     time_t start = clock();
     Dijkstra<vertex> dk(G);
