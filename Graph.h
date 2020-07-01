@@ -34,7 +34,7 @@ public:
 	//  Список смежных вершин
 	container_type adj;
 
-	vertex(size_type Name) : name(Name) {}
+	explicit vertex(size_type Name) : name(Name) {}
 
 	//  Добавление ребра
 	void addEdge(size_type dest, weight_type w) {
