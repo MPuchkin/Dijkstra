@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
     const Graph G = [argc, argv]{
         Graph G;
         if (argc == 1) {
-            G.generateGraph(100);
+            G.loadFromFile("Dijkstra.txt");
         } else {
             G.loadFromFile(argv[1]);
         }
