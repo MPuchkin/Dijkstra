@@ -1,8 +1,4 @@
 #include <iostream>
-#include <limits>
-#include <vector>
-#include <queue>
-#include <functional>
 #include <ctime>
 #include "Graph.h"
 #include "Dijkstra.h"
